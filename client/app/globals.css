@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Bodoni Moda', serif;
+  --font-display: 'Bodoni Moda', 'Cinzel', serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F3E9EC;
+  color: #00030E;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar matching #5E3A5C and #B47A9A */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3E9EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #B47A9A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5E3A5C;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism helpers with new palette */
+.glass-panel {
+  background: rgba(243, 233, 236, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 122, 154, 0.25);
+}
+
+.glass-dark {
+  background: rgba(11, 14, 26, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 122, 154, 0.3);
+}

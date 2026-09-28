@@ -1,0 +1,12 @@
+{
+  "name": "sheestuff-store-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "dev:all": "concurrently \"npm run dev --prefix client\" \"npm start --prefix server\"",
+    "start": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "build": "npm run build --prefix client"
+  }
+}

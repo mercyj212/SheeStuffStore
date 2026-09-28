@@ -39,9 +39,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', '"Bodoni Moda"', '"Playfair Display"', 'Georgia', 'serif'],
-        display: ['"Bodoni Moda"', '"Cinzel"', '"Cormorant Garamond"', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Telma"', 'Georgia', 'serif'],
+        display: ['"Telma"', 'serif'],
+        sans: ['"Switzer"', 'system-ui', 'sans-serif'],
       },
     },
   },

@@ -1,0 +1,6 @@
+FONT SHARE LICENSE (ITF / Fontshare)
+Fonts: Telma & Switzer
+Source: https://www.fontshare.com
+
+Fontshare fonts are free for personal and commercial use under the Fontshare license terms.
+Self-hosted official font files provided directly by Fontshare CDN.

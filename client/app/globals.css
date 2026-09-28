@@ -1,13 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+/* Official Fontshare Webfonts: Telma & Switzer */
+
+/* Telma (Luxury Display Serif) */
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/telma-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/telma-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/telma-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Switzer (Modern Luxury Sans) */
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Cormorant Garamond', 'Bodoni Moda', serif;
-  --font-display: 'Bodoni Moda', 'Cinzel', serif;
+  --font-sans: 'Switzer', sans-serif;
+  --font-serif: 'Telma', serif;
+  --font-display: 'Telma', serif;
 }
 
 body {
@@ -15,6 +81,18 @@ body {
   background-color: #F3E9EC;
   color: #00030E;
   overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
 
 /* Custom scrollbar matching #5E3A5C and #B47A9A */

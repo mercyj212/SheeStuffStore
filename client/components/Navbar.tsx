@@ -68,8 +68,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation Links with Telma Serif Font */}
-          <nav className="hidden lg:flex items-center gap-8 font-serif text-base font-medium tracking-wide text-[#00030E]">
+          {/* Desktop Navigation Links with Switzer Sans Font */}
+          <nav className="hidden lg:flex items-center gap-8 font-sans text-xs font-semibold uppercase tracking-widest text-[#00030E]">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (

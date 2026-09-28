@@ -83,6 +83,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Global Font Enforcement: Telma for ALL Headings, Switzer for Body & Small Text */
+h1, h2, h3, h4, h5, h6, .heading-telma {
+  font-family: var(--font-serif);
+}
+
+body, p, span, button, input, textarea, select, a, td, th, label, small, .body-switzer {
+  font-family: var(--font-sans);
+}
+
 .font-serif {
   font-family: var(--font-serif);
 }

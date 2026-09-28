@@ -1,25 +1,33 @@
-/* Official Fontshare Webfonts: Telma & Switzer */
+/* Official Fontshare Webfonts: Melodrama & Switzer */
 
-/* Telma (Luxury Display Serif) */
+/* Melodrama (Luxury Display Serif) */
 @font-face {
-  font-family: 'Telma';
-  src: url('/fonts/telma-regular.woff2') format('woff2');
+  font-family: 'Melodrama';
+  src: url('/fonts/melodrama-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Telma';
-  src: url('/fonts/telma-medium.woff2') format('woff2');
+  font-family: 'Melodrama';
+  src: url('/fonts/melodrama-medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Telma';
-  src: url('/fonts/telma-bold.woff2') format('woff2');
+  font-family: 'Melodrama';
+  src: url('/fonts/melodrama-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/fonts/melodrama-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -72,8 +80,8 @@
 
 :root {
   --font-sans: 'Switzer', sans-serif;
-  --font-serif: 'Telma', serif;
-  --font-display: 'Telma', serif;
+  --font-serif: 'Melodrama', serif;
+  --font-display: 'Melodrama', serif;
 }
 
 body {
@@ -83,8 +91,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Global Font Enforcement: Telma for ALL Headings, Switzer for Body & Small Text */
-h1, h2, h3, h4, h5, h6, .heading-telma {
+/* Global Font Enforcement: Melodrama for ALL Headings, Switzer for Body & Small Text */
+h1, h2, h3, h4, h5, h6, .heading-melodrama, .heading-telma {
   font-family: var(--font-serif);
 }
 

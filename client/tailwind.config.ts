@@ -39,8 +39,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['"Telma"', 'Georgia', 'serif'],
-        display: ['"Telma"', 'serif'],
+        serif: ['"Melodrama"', 'Georgia', 'serif'],
+        display: ['"Melodrama"', 'serif'],
         sans: ['"Switzer"', 'system-ui', 'sans-serif'],
       },
     },

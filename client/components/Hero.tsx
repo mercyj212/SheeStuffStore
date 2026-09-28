@@ -36,22 +36,15 @@ export default function Hero() {
         </Link>
 
         {/* Floating Glass Pill Navigation Bar with Switzer Sans Font */}
-        <nav className="hidden md:flex items-center gap-6 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-sans text-xs font-semibold uppercase tracking-widest text-white shadow-2xl">
+        <nav className="hidden md:flex items-center gap-7 px-7 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-sans text-xs font-semibold uppercase tracking-widest text-white shadow-2xl">
           <Link href="/" className="hover:text-[#B47A9A] transition">Home</Link>
           <Link href="/shop" className="hover:text-[#B47A9A] transition">Shop</Link>
           <Link href="/brand-story" className="hover:text-[#B47A9A] transition">Brand Story</Link>
           <Link href="/contact" className="hover:text-[#B47A9A] transition">Contact</Link>
           <Link href="/about" className="hover:text-[#B47A9A] transition">Routines</Link>
-          
-          <Link
-            href="/admin/login"
-            className="bg-[#B47A9A] text-[#00030E] font-bold px-4 py-1.5 rounded-full hover:bg-white transition text-xs shadow-md normal-case tracking-normal"
-          >
-            Log in
-          </Link>
         </nav>
 
-        {/* Right Action Icons: Wishlist, Cart & Catalog */}
+        {/* Right Action Icons: Wishlist & Cart */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsWishlistOpen(true)}
@@ -78,13 +71,6 @@ export default function Hero() {
               </span>
             )}
           </button>
-
-          <Link
-            href="/shop"
-            className="hidden sm:inline-flex bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white text-white hover:text-[#00030E] font-bold text-xs px-5 py-2.5 rounded-full transition shadow"
-          >
-            Shop Catalog
-          </Link>
         </div>
       </header>
 
@@ -93,10 +79,6 @@ export default function Hero() {
         
         {/* Left Bottom Massive Headline */}
         <div className="md:col-span-8 text-left space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#5E3A5C]/40 border border-[#B47A9A]/40 text-[#B47A9A] text-xs font-semibold backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>CLINICALLY PROVEN BOTANICAL FORMULAS</span>
-          </div>
 
           <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.05]">
             Skin that holds <br />

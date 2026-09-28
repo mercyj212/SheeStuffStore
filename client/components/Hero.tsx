@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
-import { ArrowRight, Sparkles, Star, ShoppingBag, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Sparkles, Star, ShoppingBag, Heart, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useStore } from '../lib/context/StoreContext';
 
 export default function Hero() {
   const { totalCartItems, wishlist, setIsCartOpen, setIsWishlistOpen } = useStore();
+  const [activeHoverMenu, setActiveHoverMenu] = useState<string | null>(null);
 
   return (
     <section className="relative w-full h-screen min-h-[700px] max-h-[1080px] overflow-hidden bg-[#00030E] text-[#F3E9EC] flex flex-col justify-between px-4 sm:px-8 lg:px-12 pt-3 sm:pt-5 pb-6 sm:pb-10 lg:pb-14">
@@ -23,8 +24,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#00030E]/80 via-transparent to-[#00030E]/60" />
       </div>
 
-      {/* Top Header Navigation Bar inside Hero (Logo on Left, Nav in Center/Right) */}
-      <header className="relative z-20 flex items-center justify-between max-w-7xl w-full mx-auto pt-0">
+      {/* Top Header Navigation Bar inside Hero */}
+      <header className="relative z-30 flex items-center justify-between max-w-7xl w-full mx-auto pt-0">
         
         {/* Left Aligned Prominent Logo */}
         <Link href="/" className="group flex items-center gap-3">
@@ -35,14 +36,156 @@ export default function Hero() {
           />
         </Link>
 
-        {/* Floating Glass Pill Navigation Bar with Switzer Sans Font */}
-        <nav className="hidden md:flex items-center gap-7 px-7 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-sans text-xs font-semibold uppercase tracking-widest text-white shadow-2xl">
-          <Link href="/" className="hover:text-[#B47A9A] transition">Home</Link>
-          <Link href="/shop" className="hover:text-[#B47A9A] transition">Shop</Link>
-          <Link href="/brand-story" className="hover:text-[#B47A9A] transition">Brand Story</Link>
-          <Link href="/contact" className="hover:text-[#B47A9A] transition">Contact</Link>
-          <Link href="/about" className="hover:text-[#B47A9A] transition">Routines</Link>
-        </nav>
+        {/* Floating Glass Pill Navigation Bar with Interactive Hover Mega Menu Trigger */}
+        <div className="relative" onMouseLeave={() => setActiveHoverMenu(null)}>
+          <nav className="hidden md:flex items-center gap-7 px-7 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-sans text-xs font-semibold uppercase tracking-widest text-white shadow-2xl">
+            <Link 
+              href="/" 
+              onMouseEnter={() => setActiveHoverMenu(null)}
+              className="hover:text-[#B47A9A] transition py-1"
+            >
+              Home
+            </Link>
+
+            <Link 
+              href="/shop" 
+              onMouseEnter={() => setActiveHoverMenu('shop')}
+              className="hover:text-[#B47A9A] transition py-1 flex items-center gap-1"
+            >
+              <span>Shop</span>
+            </Link>
+
+            <Link 
+              href="/brand-story" 
+              onMouseEnter={() => setActiveHoverMenu('brand-story')}
+              className="hover:text-[#B47A9A] transition py-1"
+            >
+              Brand Story
+            </Link>
+
+            <Link 
+              href="/about" 
+              onMouseEnter={() => setActiveHoverMenu('routines')}
+              className="hover:text-[#B47A9A] transition py-1"
+            >
+              Routines
+            </Link>
+
+            <Link 
+              href="/contact" 
+              onMouseEnter={() => setActiveHoverMenu('contact')}
+              className="hover:text-[#B47A9A] transition py-1"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Maybelline-Style Interactive Mega Menu Hover Drawer */}
+          {activeHoverMenu && (
+            <div 
+              onMouseEnter={() => {}}
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[720px] max-w-[92vw] bg-[#0B0E1A]/95 backdrop-blur-2xl border border-[#B47A9A]/30 rounded-3xl p-6 shadow-2xl text-white z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+            >
+              {/* 1. SHOP MEGA MENU */}
+              {activeHoverMenu === 'shop' && (
+                <div className="grid grid-cols-12 gap-6 items-center">
+                  <div className="col-span-4 space-y-2 border-r border-white/10 pr-4">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block mb-2">Categories</span>
+                    <Link href="/category/serums" className="block text-xs text-white/90 hover:text-[#B47A9A] transition font-sans">Vitamin C Serums</Link>
+                    <Link href="/category/moisturizers" className="block text-xs text-white/90 hover:text-[#B47A9A] transition font-sans">Barrier Moisture Creams</Link>
+                    <Link href="/category/lip-care" className="block text-xs text-white/90 hover:text-[#B47A9A] transition font-sans">Silk Lip Butters</Link>
+                    <Link href="/category/sunscreen" className="block text-xs text-white/90 hover:text-[#B47A9A] transition font-sans">Radiance Sunscreen</Link>
+                    <Link href="/shop" className="block text-xs text-[#B47A9A] font-bold hover:underline transition pt-2">Browse All Products →</Link>
+                  </div>
+
+                  <div className="col-span-4 space-y-2 border-r border-white/10 pr-4">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block mb-2">Collections</span>
+                    <Link href="/shop?filter=bestsellers" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">🔥 Bestsellers</Link>
+                    <Link href="/shop?filter=new" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">✨ Viral TikTok Picks</Link>
+                    <Link href="/shop?filter=sets" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">🎁 Gift & Treatment Bundles</Link>
+                  </div>
+
+                  {/* Featured Product Spotlight Card */}
+                  <div className="col-span-4 bg-white/5 rounded-2xl p-3 border border-white/10 text-center space-y-2">
+                    <img 
+                      src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400"
+                      alt="Luminary Glow Vitamin C Serum"
+                      className="w-full h-24 object-cover rounded-xl"
+                    />
+                    <div>
+                      <h4 className="font-serif text-xs font-bold text-white">Luminary Glow Serum</h4>
+                      <p className="text-[10px] text-[#B47A9A] font-bold">$48.00 • ⭐ 4.9/5</p>
+                    </div>
+                    <Link href="/product/shee-radiance-serum" className="inline-block w-full bg-[#B47A9A] text-[#00030E] text-[10px] font-bold py-1 rounded-full hover:bg-white transition">
+                      View Formula
+                    </Link>
+                  </div>
+                </div>
+              )}
+
+              {/* 2. BRAND STORY MEGA MENU */}
+              {activeHoverMenu === 'brand-story' && (
+                <div className="grid grid-cols-12 gap-6 items-center">
+                  <div className="col-span-7 space-y-3 pr-4">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block">Our Botanical Philosophy</span>
+                    <p className="text-xs text-white/80 leading-relaxed font-sans">
+                      Formulated in collaboration with leading dermatologists. 100% cruelty-free, zero toxins, and clinical-grade active botanicals for radiant skin.
+                    </p>
+                    <Link href="/brand-story" className="inline-flex items-center gap-1 text-xs font-bold text-[#B47A9A] hover:underline">
+                      <span>Read Full Brand Story</span>
+                      <ChevronRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                  <div className="col-span-5">
+                    <img 
+                      src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=400"
+                      alt="Brand Lab"
+                      className="w-full h-28 object-cover rounded-2xl border border-white/10"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* 3. ROUTINES MEGA MENU */}
+              {activeHoverMenu === 'routines' && (
+                <div className="grid grid-cols-12 gap-6 items-center">
+                  <div className="col-span-7 space-y-2 border-r border-white/10 pr-4">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block mb-2">Curated Treatment Rituals</span>
+                    <Link href="/about" className="block text-xs font-bold text-white hover:text-[#B47A9A] transition">✨ 3-Step Glass Skin Routine</Link>
+                    <p className="text-[10px] text-white/60">Serum + Barrier Cream + Radiant Lip Oil</p>
+                    <Link href="/about" className="block text-xs font-bold text-white hover:text-[#B47A9A] transition pt-2">🌙 Night Barrier Repair Ritual</Link>
+                    <p className="text-[10px] text-white/60">Peptide Deep Moisture Cream</p>
+                  </div>
+                  <div className="col-span-5 bg-white/5 rounded-2xl p-3 border border-white/10 text-center space-y-2">
+                    <span className="text-[10px] uppercase tracking-widest text-[#B47A9A] font-bold block">Routine Bundle</span>
+                    <h4 className="font-serif text-xs font-bold text-white">Glass Skin Treatment Kit</h4>
+                    <p className="text-[10px] text-emerald-400 font-bold">Save $24 Bundle Discount</p>
+                    <Link href="/shop" className="inline-block w-full bg-[#B47A9A] text-[#00030E] text-[10px] font-bold py-1 rounded-full hover:bg-white transition">
+                      Shop Routine Kit
+                    </Link>
+                  </div>
+                </div>
+              )}
+
+              {/* 4. CONTACT MEGA MENU */}
+              {activeHoverMenu === 'contact' && (
+                <div className="grid grid-cols-12 gap-6 items-center">
+                  <div className="col-span-6 space-y-2 border-r border-white/10 pr-4">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block mb-2">Customer Care & Support</span>
+                    <Link href="/contact" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">💬 24/7 Skin Consultation Support</Link>
+                    <Link href="/contact" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">📦 Track Your Order Status</Link>
+                    <Link href="/contact" className="block text-xs text-white/90 hover:text-[#B47A9A] transition">🤝 Wholesale & Press Inquiries</Link>
+                  </div>
+                  <div className="col-span-6 space-y-2 pl-2">
+                    <span className="font-serif text-sm font-bold text-[#B47A9A] uppercase tracking-wider block mb-2">Direct Contact</span>
+                    <p className="text-xs text-white/80 font-sans">Email: support@sheestuffstore.com</p>
+                    <p className="text-xs text-white/80 font-sans">Hours: Mon - Fri, 9:00 AM - 6:00 PM EST</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Right Action Icons: Wishlist & Cart */}
         <div className="flex items-center gap-3">

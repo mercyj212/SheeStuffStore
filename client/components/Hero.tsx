@@ -35,8 +35,8 @@ export default function Hero() {
           />
         </Link>
 
-        {/* Floating Glass Pill Navigation Bar */}
-        <nav className="hidden md:flex items-center gap-6 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-white shadow-2xl">
+        {/* Floating Glass Pill Navigation Bar with Telma Serif Font */}
+        <nav className="hidden md:flex items-center gap-6 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-serif text-sm font-medium tracking-wide text-white shadow-2xl">
           <Link href="/" className="hover:text-[#B47A9A] transition">Home</Link>
           <Link href="/shop" className="hover:text-[#B47A9A] transition">Shop</Link>
           <Link href="/brand-story" className="hover:text-[#B47A9A] transition">Brand Story</Link>
@@ -45,7 +45,7 @@ export default function Hero() {
           
           <Link
             href="/admin/login"
-            className="bg-[#B47A9A] text-[#00030E] font-bold px-4 py-1.5 rounded-full hover:bg-white transition text-xs shadow-md"
+            className="bg-[#B47A9A] text-[#00030E] font-sans font-bold px-4 py-1 rounded-full hover:bg-white transition text-xs shadow-md"
           >
             Log in
           </Link>

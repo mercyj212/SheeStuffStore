@@ -1,13 +1,55 @@
 'use client';
 
-import React, { useState } from 'react';
-import { ArrowRight, Sparkles, Star, ShoppingBag, Heart, ChevronRight, CheckCircle2, ShieldCheck, Leaf, Award, Flame, Gift, Mail, Phone, MapPin } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, Sparkles, Star, ShoppingBag, Heart, ChevronRight, ChevronLeft, CheckCircle2, ShieldCheck, Leaf, Award, Flame, Gift, Mail, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { useStore } from '../lib/context/StoreContext';
+
+const HERO_SLIDES = [
+  {
+    id: 1,
+    title: 'Glass Skin Radiance',
+    badge: '15% VITAMIN C & HYALURONIC',
+    desc: 'Science-backed clinical botanicals formulated to illuminate and restore your natural glow.',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=2000',
+    link: '/shop?category=serums',
+    cta: 'Explore Radiant Serums',
+  },
+  {
+    id: 2,
+    title: 'Velvet Silk Lip Care',
+    badge: 'HYDRATING ROSEHIP & PEPTIDES',
+    desc: 'Overnight lip masks and rose oils that lock in 24-hour hydration with zero stickiness.',
+    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=2000',
+    link: '/shop?category=lip-care',
+    cta: 'Shop Silk Lip Combos',
+  },
+  {
+    id: 3,
+    title: 'Lipid Barrier Protection',
+    badge: 'DERMATOLOGIST TESTED 5.5 pH',
+    desc: 'Formulated for sensitive skin to strengthen the natural lipid moisture barrier and soothe redness.',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=2000',
+    link: '/shop?category=moisturizers',
+    cta: 'View Barrier Moisture Creams',
+  },
+  {
+    id: 4,
+    title: 'Glazed Donut Gel Nails',
+    badge: 'REUSABLE SALON QUALITY',
+    desc: 'Reusable gel press-on nails that last up to 3 weeks with zero damage to natural nails.',
+    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=2000',
+    link: '/shop?category=sets-kits',
+    cta: 'Browse Press-On Sets',
+  },
+];
 
 export default function Hero() {
   const { totalCartItems, wishlist, setIsCartOpen, setIsWishlistOpen } = useStore();
   const [activeHoverMenu, setActiveHoverMenu] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const navLinks = [
     { name: 'Beauty', href: '/shop?category=makeup', hoverKey: 'beauty' },
@@ -18,22 +60,75 @@ export default function Hero() {
     { name: 'Brand Story', href: '/brand-story', hoverKey: 'brand-story' },
   ];
 
+  // Auto-play timer for sliding faces
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (diff > 50) {
+      handleNextSlide();
+    } else if (diff < -50) {
+      handlePrevSlide();
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <section 
-      className="relative w-full h-screen min-h-[700px] max-h-[1080px] overflow-hidden bg-[#00030E] text-[#F3E9EC] flex flex-col justify-between px-4 sm:px-8 lg:px-12 pt-3 sm:pt-5 pb-6 sm:pb-10 lg:pb-14"
-      onMouseLeave={() => setActiveHoverMenu(null)}
+      className="relative w-full h-screen min-h-[720px] max-h-[1080px] overflow-hidden bg-[#00030E] text-[#F3E9EC] flex flex-col justify-between px-4 sm:px-8 lg:px-12 pt-3 sm:pt-5 pb-6 sm:pb-10 lg:pb-14 select-none"
+      onMouseLeave={() => {
+        setActiveHoverMenu(null);
+        setIsPaused(false);
+      }}
+      onMouseEnter={() => setIsPaused(true)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       
-      {/* Background High-Res Full-Screen Image with Vignette Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=2000"
-          alt="SheeStuff Store Radiant Skin"
-          className="w-full h-full object-cover object-center filter brightness-[0.85] contrast-[1.05]"
-        />
-        {/* Soft Radial & Linear Dark Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#00030E] via-[#00030E]/30 to-[#00030E]/60 opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00030E]/80 via-transparent to-[#00030E]/60" />
+      {/* Dynamic 3D Face-Turning Slide Background Layer */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {HERO_SLIDES.map((slide, idx) => {
+          const isActive = idx === currentSlide;
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
+                isActive
+                  ? 'opacity-100 scale-100 rotate-0 translate-x-0 filter brightness-[0.88] contrast-[1.05]'
+                  : 'opacity-0 scale-105 -rotate-y-12 translate-x-10 pointer-events-none filter brightness-50'
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover object-center transition-transform duration-[7000ms] ease-out scale-105"
+              />
+              {/* Soft Gradient Overlays for Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00030E] via-[#00030E]/40 to-[#00030E]/70 opacity-95" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#00030E]/85 via-transparent to-[#00030E]/70" />
+            </div>
+          );
+        })}
       </div>
 
       {/* Top Header Navigation Bar inside Hero */}
@@ -108,7 +203,7 @@ export default function Hero() {
       {activeHoverMenu && (
         <div 
           className="absolute top-24 left-0 right-0 w-full bg-[#00030E]/98 backdrop-blur-2xl border-t border-b border-[#B47A9A]/30 shadow-2xl text-white z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-          onMouseEnter={() => {}}
+          onMouseEnter={() => setIsPaused(true)}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-10">
             
@@ -530,6 +625,77 @@ export default function Hero() {
           </div>
         </div>
       )}
+
+      {/* Main Interactive Carousel Content Overlay */}
+      <div className="relative z-10 max-w-7xl w-full mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pt-12 pb-6">
+        
+        {/* Left Slide Headline & Subtitle spotlight */}
+        <div className="lg:col-span-8 text-left space-y-5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#B47A9A] text-xs font-serif font-bold uppercase tracking-wider shadow">
+            <Sparkles className="w-3.5 h-3.5 text-[#B47A9A]" />
+            <span>{HERO_SLIDES[currentSlide].badge}</span>
+          </div>
+
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] transition-all duration-500">
+            {HERO_SLIDES[currentSlide].title}
+          </h1>
+
+          <p className="font-sans text-xs sm:text-sm text-white/80 max-w-lg leading-relaxed">
+            {HERO_SLIDES[currentSlide].desc}
+          </p>
+
+          <div className="pt-2">
+            <Link
+              href={HERO_SLIDES[currentSlide].link}
+              className="inline-flex items-center gap-3 bg-[#B47A9A] text-[#00030E] font-sans font-bold text-xs sm:text-sm px-7 py-3.5 rounded-full shadow-xl hover:bg-white transition group"
+            >
+              <span>{HERO_SLIDES[currentSlide].cta}</span>
+              <ArrowRight className="w-4 h-4 text-[#00030E] group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Carousel Slide Controls & Indicator Pills */}
+        <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-between space-y-6">
+          
+          {/* Prev / Next Slide Arrows */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handlePrevSlide}
+              className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:text-[#B47A9A] transition shadow-lg cursor-pointer active:scale-95"
+              aria-label="Previous Face Slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <span className="font-sans text-xs font-bold text-white/80 tracking-widest px-2">
+              0{currentSlide + 1} / 0{HERO_SLIDES.length}
+            </span>
+            <button
+              onClick={handleNextSlide}
+              className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:text-[#B47A9A] transition shadow-lg cursor-pointer active:scale-95"
+              aria-label="Next Face Slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Interactive Slide Progress Dots */}
+          <div className="flex items-center gap-2">
+            {HERO_SLIDES.map((slide, idx) => (
+              <button
+                key={slide.id}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
+                  idx === currentSlide ? 'w-8 bg-[#B47A9A]' : 'w-2 bg-white/30 hover:bg-white/60'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
   );

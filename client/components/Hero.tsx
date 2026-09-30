@@ -531,58 +531,6 @@ export default function Hero() {
         </div>
       )}
 
-      {/* Main Full-Screen Middle & Bottom Content */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto my-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-12 pb-6">
-        
-        {/* Left Bottom Massive Headline */}
-        <div className="md:col-span-8 text-left space-y-6">
-
-          <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.05]">
-            Skin that holds <br />
-            <span className="italic text-[#B47A9A]">the light.</span>
-          </h1>
-
-          <div className="pt-2">
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-3 text-xs sm:text-sm font-bold text-[#F3E9EC] hover:text-[#B47A9A] border-b-2 border-[#B47A9A] pb-1 transition group font-sans"
-            >
-              <span>Check Treatment Eligibility & Shop Formulas</span>
-              <ArrowRight className="w-4 h-4 text-[#B47A9A] group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Right Middle Subheadline Description */}
-        <div className="md:col-span-4 text-left md:text-right space-y-4">
-          <p className="text-sm sm:text-base text-[#F3E9EC]/90 font-serif leading-relaxed max-w-xs md:ml-auto">
-            Science-backed skincare formulated to restore your natural, radiant glow.
-          </p>
-
-          <div className="flex items-center justify-start md:justify-end gap-2 text-xs text-[#B47A9A] font-sans">
-            <div className="flex text-amber-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
-              ))}
-            </div>
-            <span className="font-bold text-white text-xs">4.9 / 5.0 Rating</span>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Subtle Scroll Indicator */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto flex items-center justify-between text-[11px] text-[#F3E9EC]/70 pt-4 border-t border-white/10 font-sans">
-        <span>© 2026 SheeStuff Store • Luxe Clinical Botanicals</span>
-        <div className="flex items-center gap-4">
-          <span>100% Organic</span>
-          <span>•</span>
-          <span>Cruelty Free</span>
-          <span>•</span>
-          <span>Dermatologist Approved</span>
-        </div>
-      </div>
-
     </section>
   );
 }
